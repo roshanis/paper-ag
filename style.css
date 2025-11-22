@@ -392,8 +392,8 @@ h1 {
 
     .feature-grid {
         flex: 1;
-        grid-template-columns: 1fr;
-        /* Stack cards on the right */
+        grid-template-columns: repeat(2, 1fr);
+        /* 2x2 Grid for better balance */
     }
 }
 
