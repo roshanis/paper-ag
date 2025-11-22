@@ -22,6 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(element);
     });
 
+    // Smart Navbar (Mouse & Scroll)
+    const navbar = document.querySelector('.navbar');
+    let mouseY = 0;
+
+    function updateNavbar() {
+        // Show if at top of page OR mouse is near top
+        if (window.scrollY < 50 || mouseY < 100) {
+            navbar.classList.remove('hidden');
+        } else {
+            navbar.classList.add('hidden');
+        }
+    }
+
+    window.addEventListener('mousemove', (e) => {
+        mouseY = e.clientY;
+        updateNavbar();
+    });
+
+    window.addEventListener('scroll', () => {
+        updateNavbar();
+    });
+
     // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
