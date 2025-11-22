@@ -1,26 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Scroll Reveal Animation
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
+    const revealElements = document.querySelectorAll('.reveal');
 
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target); // Only animate once
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target); // Only animate once
             }
         });
-    }, observerOptions);
+    }, {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    });
 
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(40px)';
-        section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-        observer.observe(section);
+    revealElements.forEach(element => {
+        revealObserver.observe(element);
+    });
+
+    // Navbar Scroll Effect
+    let lastScroll = 0;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            navbar.classList.remove('hidden');
+            return;
+        }
+
+        if (currentScroll > lastScroll && !navbar.classList.contains('hidden')) {
+            // Scrolling down
+            navbar.classList.add('hidden');
+        } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
+            // Scrolling up
+            navbar.classList.remove('hidden');
+        }
+
+        lastScroll = currentScroll;
     });
 
     // Smooth Scroll
