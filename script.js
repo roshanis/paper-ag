@@ -18,27 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(element);
     });
 
-    // Navbar Scroll Effect
-    let lastScroll = 0;
-    const navbar = document.querySelector('.navbar');
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll <= 0) {
-            navbar.classList.remove('hidden');
-            return;
-        }
-
-        if (currentScroll > lastScroll && !navbar.classList.contains('hidden')) {
-            // Scrolling down
-            navbar.classList.add('hidden');
-        } else if (currentScroll < lastScroll && navbar.classList.contains('hidden')) {
-            // Scrolling up
-            navbar.classList.remove('hidden');
-        }
-
-        lastScroll = currentScroll;
+    revealElements.forEach(element => {
+        revealObserver.observe(element);
     });
 
     // Smooth Scroll
