@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Heart Particles ---
     const heartGeometry = new THREE.BufferGeometry();
-    const heartCount = 2000;
+    const heartCount = 4000; // Increased density
     const heartPositions = new Float32Array(heartCount * 3);
     const heartColors = new Float32Array(heartCount * 3);
     const heartSizes = new Float32Array(heartCount);
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     heartGeometry.setAttribute('size', new THREE.BufferAttribute(heartSizes, 1));
 
     const heartMaterial = new THREE.PointsMaterial({
-        size: 0.03,
+        size: 0.025, // Slightly smaller particles for higher density look
         vertexColors: true,
         map: particleTexture,
         transparent: true,
@@ -136,49 +136,20 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(bgParticles);
 
 
-    // --- Mouse Interaction ---
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetRotationX = 0;
-    let targetRotationY = 0;
-
-    const windowHalfX = window.innerWidth / 2;
-    const windowHalfY = window.innerHeight / 2;
-
-    document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX - windowHalfX);
-        mouseY = (event.clientY - windowHalfY);
-    });
-
     // --- Animation Loop ---
     let time = 0;
 
     function animate() {
         requestAnimationFrame(animate);
 
-        time += 0.015;
+        time += 0.01;
 
-        // Realistic Heartbeat (Lub-Dub)
-        // Using a combination of exponentials and sines to mimic the ECG P-QRS-T wave roughly in motion
-        // Beat 1 (Lub) at t=0, Beat 2 (Dub) at t=0.3ish
-        const beatCycle = time % 1.5; // 1.5 seconds per cycle (approx 40 bpm - slow resting)
-        let scale = 1;
+        // Original simple heartbeat
+        const scale = 1 + Math.sin(time * 5) * 0.05 + Math.sin(time * 10) * 0.02;
+        heart.scale.set(scale, scale, scale);
 
-        if (beatCycle < 0.2) {
-            scale = 1 + Math.sin(beatCycle * Math.PI * 5) * 0.1; // Sharp contraction
-        } else if (beatCycle > 0.3 && beatCycle < 0.5) {
-            scale = 1 + Math.sin((beatCycle - 0.3) * Math.PI * 5) * 0.05; // Smaller relaxation/second beat
-        }
-
-        // Smooth interpolation for scale
-        heart.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.2);
-
-        // Mouse Rotation (Smooth damping)
-        targetRotationY = mouseX * 0.001;
-        targetRotationX = mouseY * 0.001;
-
-        heart.rotation.y += 0.05 * (targetRotationY - heart.rotation.y);
-        heart.rotation.x += 0.05 * (targetRotationX - heart.rotation.x);
+        // Constant gentle rotation
+        heart.rotation.y += 0.002;
 
         // Background particles slow drift
         bgParticles.rotation.y -= 0.0005;
