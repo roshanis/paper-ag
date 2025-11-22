@@ -177,13 +177,34 @@
 
                 <div class="demo-container reveal">
                     <div class="patient-profile">
-                        <h3>Patient Profile</h3>
-                        <ul>
-                            <li><strong>Age:</strong> 45</li>
-                            <li><strong>BMI:</strong> 24 (Normal)</li>
-                            <li><strong>Cholesterol:</strong> Borderline</li>
-                            <li><strong>Genetics:</strong> High Lp(a)</li>
-                        </ul>
+                        <h3>Risk Comparison</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Factor</th>
+                                    <th>General Pop.</th>
+                                    <th class="highlight-col">South Asian</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Heart Disease Onset</td>
+                                    <td>Age 65+</td>
+                                    <td class="highlight-col"><strong>Age 55+</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Diabetes Risk (BMI 23)</td>
+                                    <td>Low</td>
+                                    <td class="highlight-col"><strong>High</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Lp(a) Elevation</td>
+                                    <td>20%</td>
+                                    <td class="highlight-col"><strong>35-40%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="patient-context"><strong>Current Patient:</strong> Male, 45, BMI 24, High Lp(a)</p>
                     </div>
 
                     <div class="comparison-view">

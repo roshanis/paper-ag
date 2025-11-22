@@ -569,6 +569,50 @@ h1 {
     padding-bottom: 0.8rem;
 }
 
+/* Comparison Table */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.comparison-table th {
+    text-align: left;
+    padding-bottom: 1rem;
+    color: #888;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #eee;
+}
+
+.comparison-table td {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f5f5f5;
+    color: #555;
+}
+
+.comparison-table .highlight-col {
+    color: var(--secondary);
+    font-weight: 600;
+    padding-left: 1rem;
+}
+
+.comparison-table th.highlight-col {
+    color: var(--secondary);
+}
+
+.patient-context {
+    font-size: 0.9rem;
+    color: #666;
+    background: #f9f9f9;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+}
+
 .comparison-view {
     flex: 2;
     display: flex;
