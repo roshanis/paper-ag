@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const heartColors = new Float32Array(heartCount * 3);
     const heartSizes = new Float32Array(heartCount);
 
-    const color1 = new THREE.Color(0xff4b4b); // Red
-    const color2 = new THREE.Color(0xff8080); // Lighter red
-    const color3 = new THREE.Color(0xe36414); // Secondary orange accent
+    const color1 = new THREE.Color(0xff0000); // Pure Red
+    const color2 = new THREE.Color(0xcc0000); // Darker Red
+    const color3 = new THREE.Color(0xff3333); // Lighter Red
 
     for (let i = 0; i < heartCount; i++) {
         const t = Math.random() * Math.PI * 2;
@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Colors
         const mixRatio = Math.random();
         let mixedColor;
-        if (Math.random() > 0.9) {
-            mixedColor = color3; // Occasional orange spark
+        if (Math.random() > 0.8) {
+            mixedColor = color3; // Occasional lighter red highlight
         } else {
             mixedColor = color1.clone().lerp(color2, mixRatio);
         }
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         vertexColors: true,
         map: particleTexture,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.9, // Increased opacity for "redder" look
         depthWrite: false,
         blending: THREE.AdditiveBlending
     });
@@ -113,8 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bgPositions[i * 3 + 1] = (Math.random() - 0.5) * 10;
         bgPositions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 2; // Push back slightly
 
-        const c = new THREE.Color(0xffffff);
-        c.setHSL(Math.random(), 0.5, 0.5);
+        // Red-tinted background particles
+        const c = new THREE.Color(0xff0000);
+        c.setHSL(0, 1, Math.random() * 0.4 + 0.1); // Red hue, varying darkness
         bgColors[i * 3] = c.r;
         bgColors[i * 3 + 1] = c.g;
         bgColors[i * 3 + 2] = c.b;
